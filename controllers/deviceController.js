@@ -28,7 +28,8 @@ class DeviceController {
 
             // вызываем функцию в которую передаём все параметры
             // для файла мы передаём только его имя, а не сам файл
-            const device = await Device.create({ name, price, brandId, typeId, info, img: fileName })
+            const device = await Device.create({ name, price, brandId, typeId, img: fileName })
+            // const device = await Device.create({ name, price, brandId, typeId, info, img: fileName })
 
             // задаём условие проверки наличия info
             if (info) {
@@ -37,12 +38,15 @@ class DeviceController {
                 // на фронте в json строку
                 info = JSON.parse(info)
                 // после того как распарсили, нужно по масиву пройтись
-                info.forEach(i =>
+                info.forEach(i => {
+                    // console.log('Parsed info:', i)
                     DeviceInfo.create({
                         title: i.title,
                         description: i.description,
-                        deviceId: i.id
+                        deviceId: device.id
                     })
+                }
+
                 )
                 // а на беке опять в js объекты
             }

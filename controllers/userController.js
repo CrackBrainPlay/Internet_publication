@@ -82,7 +82,7 @@ class UserController {
         //команда для перезаписи токена
         const token = generateJWT(req.user.id, req.user.email, req.user.role)
         // возвращаем сгенерированный токен клиенту
-        return res.json(token)
+        return res.json({ token })
 
         // res.json({ message: 'all work!' })
 
